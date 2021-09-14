@@ -1,0 +1,152 @@
+Using CUDA device0 _CudaDeviceProperties(name='GeForce GTX 1070 Ti', total_memory=8192MB)
+
+Namespace(adam=False, batch_size=1, bucket='', cache_images=True, cfg='models/yolov4-p6.yaml', data='.\\data\\Gird.yaml', device='', epochs=30, evolve=False, global_rank=-1, hyp='data/hyp.finetune.yaml', img_size=[960, 960], local_rank=-1, logdir='runs/', multi_scale=False, name='', noautoanchor=False, nosave=False, notest=False, rect=False, resume=False, single_cls=False, sync_bn=False, total_batch_size=1, weights='runs/exp25/weights/last.pt', world_size=1)
+Start Tensorboard with "tensorboard --logdir runs/", view at http://localhost:6006/
+Hyperparameters {'lr0': 0.01, 'momentum': 0.937, 'weight_decay': 0.0005, 'giou': 0.05, 'cls': 0.5, 'cls_pw': 1.0, 'obj': 1.0, 'obj_pw': 1.0, 'iou_t': 0.2, 'anchor_t': 4.0, 'fl_gamma': 0.0, 'hsv_h': 0.015, 'hsv_s': 0.7, 'hsv_v': 0.4, 'degrees': 0.0, 'translate': 0.5, 'scale': 0.8, 'shear': 0.0, 'perspective': 0.0, 'flipud': 0.0, 'fliplr': 0.5, 'mixup': 0.2}
+Overriding models/yolov4-p6.yaml nc=80 with nc=3
+
+                 from  n    params  module                                  arguments                     
+  0                -1  1       928  models.common.Conv                      [3, 32, 3, 1]                 
+  1                -1  1     18560  models.common.Conv                      [32, 64, 3, 2]                
+  2                -1  1     19904  models.common.BottleneckCSP             [64, 64, 1]                   
+  3                -1  1     73984  models.common.Conv                      [64, 128, 3, 2]               
+  4                -1  1    161152  models.common.BottleneckCSP             [128, 128, 3]                 
+  5                -1  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+  6                -1  1   2614016  models.common.BottleneckCSP             [256, 256, 15]                
+  7                -1  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+  8                -1  1  10438144  models.common.BottleneckCSP             [512, 512, 15]                
+  9                -1  1   4720640  models.common.Conv                      [512, 1024, 3, 2]             
+ 10                -1  1  20728832  models.common.BottleneckCSP             [1024, 1024, 7]               
+ 11                -1  1   9439232  models.common.Conv                      [1024, 1024, 3, 2]            
+ 12                -1  1  20728832  models.common.BottleneckCSP             [1024, 1024, 7]               
+ 13                -1  1   7610368  models.common.SPPCSP                    [1024, 512, 1]                
+ 14                -1  1    263168  models.common.Conv                      [512, 512, 1, 1]              
+ 15                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 16                -6  1    525312  models.common.Conv                      [1024, 512, 1, 1]             
+ 17          [-1, -2]  1         0  models.common.Concat                    [1]                           
+ 18                -1  1   9185280  models.common.BottleneckCSP2            [1024, 512, 3]                
+ 19                -1  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 20                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 21               -13  1    131584  models.common.Conv                      [512, 256, 1, 1]              
+ 22          [-1, -2]  1         0  models.common.Concat                    [1]                           
+ 23                -1  1   2298880  models.common.BottleneckCSP2            [512, 256, 3]                 
+ 24                -1  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 25                -1  1         0  torch.nn.modules.upsampling.Upsample    [None, 2, 'nearest']          
+ 26               -20  1     33024  models.common.Conv                      [256, 128, 1, 1]              
+ 27          [-1, -2]  1         0  models.common.Concat                    [1]                           
+ 28                -1  1    576000  models.common.BottleneckCSP2            [256, 128, 3]                 
+ 29                -1  1    295424  models.common.Conv                      [128, 256, 3, 1]              
+ 30                -2  1    295424  models.common.Conv                      [128, 256, 3, 2]              
+ 31          [-1, 23]  1         0  models.common.Concat                    [1]                           
+ 32                -1  1   2298880  models.common.BottleneckCSP2            [512, 256, 3]                 
+ 33                -1  1   1180672  models.common.Conv                      [256, 512, 3, 1]              
+ 34                -2  1   1180672  models.common.Conv                      [256, 512, 3, 2]              
+ 35          [-1, 18]  1         0  models.common.Concat                    [1]                           
+ 36                -1  1   9185280  models.common.BottleneckCSP2            [1024, 512, 3]                
+ 37                -1  1   4720640  models.common.Conv                      [512, 1024, 3, 1]             
+ 38                -2  1   2360320  models.common.Conv                      [512, 512, 3, 2]              
+ 39          [-1, 13]  1         0  models.common.Concat                    [1]                           
+ 40                -1  1   9185280  models.common.BottleneckCSP2            [1024, 512, 3]                
+ 41                -1  1   4720640  models.common.Conv                      [512, 1024, 3, 1]             
+ 42  [29, 33, 37, 41]  1     90240  models.yolo.Detect                      [3, [[13, 17, 31, 25, 24, 51, 61, 45], [61, 45, 48, 102, 119, 96, 97, 189], [97, 189, 217, 184, 171, 384, 324, 451], [324, 451, 545, 357, 616, 618, 1024, 1024]], [256, 512, 1024, 1024]]
+Model Summary: 599 layers, 1.26722e+08 parameters, 1.26722e+08 gradients
+
+Transferred 1184/1186 items from runs/exp25/weights/last.pt
+Optimizer groups: 199 .bias, 205 conv.weight, 195 other
+runs/exp25/weights/last.pt has been trained for 331 epochs. Fine-tuning for 30 additional epochs.
+
+Analyzing anchors... anchors/target = 6.82, Best Possible Recall (BPR) = 1.0000
+Image sizes 960 train, 960 test
+Using 0 dataloader workers
+Starting training for 361 epochs...
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.228       0.871       0.569       0.177
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100        0.29       0.853       0.511       0.169
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.314       0.829       0.678       0.289
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.308       0.901       0.724       0.309
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.363       0.897       0.757       0.305
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.331       0.882       0.833       0.385
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.283       0.894       0.816       0.396
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.291       0.898       0.815       0.399
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.288       0.887        0.78       0.369
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100        0.32       0.894       0.797       0.379
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.331       0.875       0.818       0.415
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100        0.32       0.882       0.813       0.367
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100        0.33       0.894       0.803       0.355
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.301       0.901       0.811       0.385
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.348       0.904       0.819       0.404
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.371       0.901       0.815       0.403
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.313       0.905        0.82       0.381
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.335       0.905        0.82       0.387
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.358       0.891       0.827       0.391
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.312       0.887       0.791       0.396
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.278       0.901       0.783       0.385
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.307       0.901       0.798       0.406
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100        0.38       0.886       0.809       0.387
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.317       0.887       0.801       0.403
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.366        0.92       0.836       0.428
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.312       0.908       0.821        0.42
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.281       0.894       0.805        0.41
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.329       0.901       0.819       0.415
+
+     Epoch   gpu_mem      GIoU       obj       cls     total   targets  img_size
+                 all          29         100       0.298       0.923       0.805       0.407
+Optimizer stripped from runs\exp26\weights\last.pt, saved as runs\exp26\weights\last_strip.pt, 254.3MB
+Optimizer stripped from runs\exp26\weights\best.pt, saved as runs\exp26\weights\best_strip.pt, 254.3MB
+29 epochs completed in 0.966 hours.
+

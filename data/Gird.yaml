@@ -1,0 +1,9 @@
+# train and val datasets (image directory or *.txt file with image paths)
+train: D:/tot_nghiep/images/train/
+val: D:/tot_nghiep/images/valid/
+
+# number of classes
+nc: 3
+
+# class names
+names: [ 'ong_noi', 'khoa_neo',  'tru_su']
